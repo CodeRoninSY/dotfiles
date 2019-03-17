@@ -19,33 +19,32 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'Yggdroot/indentline'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'honza/vim-snippets'
+Plug 'jiangmiao/auto-pairs'
+Plug 'jistr/vim-nerdtree-tabs'
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/vim-github-dashboard'
-Plug 'honza/vim-snippets'
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'jistr/vim-nerdtree-tabs'
-Plug 'scrooloose/syntastic'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-fugitive'
-Plug 'jiangmiao/auto-pairs'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'wsdjeg/FlyGrep.vim'  " grep on the fly
-Plug 'zchee/deoplete-go', { 'do': 'make'}
-Plug 'zchee/deoplete-jedi'
 Plug 'mattn/emmet-vim'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'scrooloose/syntastic'
 Plug 'sheerun/vim-polyglot'
-Plug 'Yggdroot/indentline'
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'wsdjeg/FlyGrep.vim'  " grep on the fly
+Plug 'zchee/deoplete-jedi'
 
 " Using a non-master branch
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 
 " Plugin outside ~/.vim/plugged with post-update hook
+Plug 'SirVer/ultisnips'
+Plug 'brooth/far.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'     " fuzzy file find
 Plug 'rstacruz/sparkup'         " parser for a condensed HTML format
-Plug 'SirVer/ultisnips'
-Plug 'brooth/far.vim'
 
 if has('nvim')
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -55,59 +54,63 @@ else
     Plug 'roxma/vim-hug-neovim-rpc'
 endif
 
-Plug 'w0rp/ale'
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
-Plug 'arthurxavierx/vim-unicoder'
-Plug 'vim-scripts/indentpython.vim'
 Plug 'Valloric/YouCompleteMe'
-Plug 'nvie/vim-flake8'
-Plug 'klen/python-mode'
-Plug 'scrooloose/nerdcommenter'  " nerd commenter - use <leader>cc
-Plug 'vim-perl/vim-perl6'       " perl6 support
-Plug 'soramugi/auto-ctags.vim'  " ctags
-Plug 'universal-ctags/ctags'
-Plug 'jsfaint/gen_tags.vim'     " ctags / gtags
+Plug 'arthurxavierx/vim-unicoder'
 Plug 'christoomey/vim-system-copy'
-Plug 'ervandew/supertab'        " supertab context sensitive completion
-Plug 'vim-scripts/ZoomWin'      " zoom in/out of windows - toggle between wins
-Plug 'tpope/vim-sensible'
-Plug 'pangloss/vim-javascript'
 Plug 'elzr/vim-json'
-Plug 'python-mode/python-mode', { 'branch': 'develop' }
-Plug 'moll/vim-node'
-Plug 'vim-latex/vim-latex'
-Plug 'fs111/pydoc.vim'
-Plug 'nvie/vim-flake8'
+Plug 'ervandew/supertab'        " supertab context sensitive completion
 Plug 'fisadev/dragvisuals.vim'              " dragvisuals
-Plug 'vim-scripts/perl-support.vim'         " perl-support
-Plug 'vim-scripts/L9'                       " fuzzy finder requires this L9 library!
-Plug 'vim-scripts/FuzzyFinder'              " fuzzy finder
-Plug 'mileszs/ack.vim'                      " ack for grepping
+Plug 'fs111/pydoc.vim'
 Plug 'jlanzarotta/bufexplorer'              " buffer explorer: usage : <leader>be
+Plug 'jsfaint/gen_tags.vim'     " ctags / gtags
+Plug 'klen/python-mode'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
+Plug 'mileszs/ack.vim'                      " ack for grepping
+Plug 'moll/vim-node'
+Plug 'nvie/vim-flake8'
+Plug 'nvie/vim-flake8'
+Plug 'pangloss/vim-javascript'
+Plug 'python-mode/python-mode', { 'branch': 'develop' }
+Plug 'scrooloose/nerdcommenter'  " nerd commenter - use <leader>cc
+Plug 'soramugi/auto-ctags.vim'  " ctags
+Plug 'tpope/vim-sensible'
+Plug 'universal-ctags/ctags'
+Plug 'vim-latex/vim-latex'
+Plug 'vim-perl/vim-perl6'       " perl6 support
+Plug 'vim-scripts/AutoComplPop'             " autocomplete for perl
+Plug 'vim-scripts/FuzzyFinder'              " fuzzy finder
+Plug 'vim-scripts/L9'                       " fuzzy finder requires this L9 library!
+Plug 'vim-scripts/ZoomWin'      " zoom in/out of windows - toggle between wins
+Plug 'vim-scripts/indentpython.vim'
+Plug 'vim-scripts/perl-support.vim'         " perl-support
+Plug 'w0rp/ale'
+Plug 'wolfgangmehner/perl-support'          " perl-support
+Plug 'yanick/Neovim-RPC'                    " neovim RPC
+Plug 'zenbro/mirror.vim'                    " remote sync on any development platform. usage: <leader>ss
 
 "======== colorscheme plugins
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'iCyMind/NeoSolarized'             " NeoSolarized
-Plug 'dracula/vim', { 'as': 'dracula' }  " dracula
-Plug 'morhetz/gruvbox'                  " gruvbox
-Plug 'kaicataldo/material.vim'  " vim material theme
-Plug 'hzchirs/vim-material'     " vim-material theme
-Plug 'joshdick/onedark.vim'  " onedark  * best
 Plug 'NLKNguyen/papercolor-theme'       " papercolor
-Plug 'nanotech/jellybeans.vim'          " jellybeans
-Plug 'crusoexia/vim-dracula'
 Plug 'altercation/vim-colors-solarized'
+Plug 'crusoexia/vim-dracula'
+Plug 'dracula/vim', { 'as': 'dracula' }  " dracula
+Plug 'hzchirs/vim-material'     " vim-material theme
+Plug 'iCyMind/NeoSolarized'             " NeoSolarized
+Plug 'joshdick/onedark.vim'  " onedark  * best
+Plug 'jpo/vim-railscasts-theme'
+Plug 'kaicataldo/material.vim'  " vim material theme
 Plug 'lifepillar/vim-solarized8'
 Plug 'mhartington/oceanic-next'
-Plug 'tomasr/molokai'
-Plug 'jpo/vim-railscasts-theme'
+Plug 'morhetz/gruvbox'                  " gruvbox
+Plug 'nanotech/jellybeans.vim'          " jellybeans
 Plug 'rainux/vim-desert-warm-256'
+Plug 'tomasr/molokai'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'zeis/vim-kolor'
 
 call plug#end()
@@ -133,19 +136,19 @@ set autowrite
 set backspace=indent,eol,start
 set browsedir=current
 set complete+=k
+set hidden
 set nowrap
 set ruler
 set showcmd
-set visualbell
-set hidden
-set splitright
 set splitbelow
+set splitright
+set visualbell
 
 set history=1000
-set undolevels=1000
 set nobackup
-set nowritebackup
 set noswapfile
+set nowritebackup
+set undolevels=1000
 
 "==============
 let mapleader=","
@@ -170,16 +173,16 @@ set wildignore=*.bmp,*.gif,*.ico,*.jpg,*.png
 set wildignore=*.pdf,*.doc,*.docx,*.ppt,*.pptx
 set wildignore=*.rar,*.zip,*.tar,*.tar.gz,*.tar.xz
 
-set expandtab
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set number
-set relativenumber
-set numberwidth=5
-set cursorline
-set scroll=10
 set clipboard+=unnamedplus
+set cursorline
+set expandtab
+set number
+set numberwidth=5
+set relativenumber
+set scroll=10
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
 
 highlight ColorColumn ctermbg=DarkGrey
 set colorcolumn=81
@@ -264,6 +267,10 @@ endfunction
 " Fuzzy Finder matching mapping
 map <leader>ff :FufCoverageFile<CR>
 
+" mirror.vim shortcuts
+command! SyncSave w | MirrorPush
+map <leader>ss :SyncSave<CR>
+
 " bind nohl
 noremap <C-n> :nohl<CR>
 vnoremap <C-n> :nohl<CR>
@@ -317,6 +324,13 @@ let g:ale_completion_enabled = 1
 let g:ale_python_autopep8_executable = 'autopep8'
 let g:ale_python_flake8_executable = 'python3'
 let g:ale_python_flake8_options = '-:wam flake8'
+let g:ale_linters = {
+    \ 'sh': ['language_server'],
+    \ }
+
+let g:LanguageClient_serverCommands = {
+    \ 'sh': ['bash-language-server', 'start']
+    \ }
 
 " Nerd Commenter settings
 let g:NERDSpaceDelims = 1
@@ -454,19 +468,19 @@ set termguicolors
 "" select colorscheme
 
 set background=dark
-colorscheme NeoSolarized            " IMHO best colorsheme for python, bash, perl
+"colorscheme PaperColor
+"colorscheme desert-warm-256
 "colorscheme dracula                " not bad
 "colorscheme gruvbox                " very similar to molokai, good for eye
-"colorscheme material
-"colorscheme vim-material
-"colorscheme onedark
-"colorscheme PaperColor
 "colorscheme jellybeans
-"colorscheme vim-dracula
-"colorscheme vim-colors-solarized
-"colorscheme solarized8
-"colorscheme oceanic-next
-"colorscheme molokai
-"colorscheme railscasts
-"colorscheme desert-warm-256
 "colorscheme kolor
+"colorscheme material
+"colorscheme molokai
+"colorscheme oceanic-next
+"colorscheme onedark
+"colorscheme railscasts
+"colorscheme solarized8
+"colorscheme vim-colors-solarized
+"colorscheme vim-dracula
+"colorscheme vim-material
+colorscheme NeoSolarized            " IMHO best colorsheme for python, bash, perl
