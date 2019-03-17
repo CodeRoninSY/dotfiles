@@ -1,0 +1,472 @@
+" .vimrc
+"
+"===============================================================================
+let vim_plug_just_installed = 0
+let vim_plug_path = expand('~/.vim/autoload/plug.vim')
+if !filereadable(vim_plug_path)
+    echo "Installing Vim-plug..."
+    echo ""
+    silent !mkdir -p ~/.vim/autoload
+    silent !curl -flo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    let vim_plug_just_installed = 1
+endif
+
+" manually load vim-plug the first time
+if vim_plug_just_installed
+    :execute 'source '.fnameescape(vim_plug_path)
+endif
+
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/vim-github-dashboard'
+Plug 'honza/vim-snippets'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'scrooloose/syntastic'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'
+Plug 'jiangmiao/auto-pairs'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'wsdjeg/FlyGrep.vim'  " grep on the fly
+Plug 'zchee/deoplete-go', { 'do': 'make'}
+Plug 'zchee/deoplete-jedi'
+Plug 'mattn/emmet-vim'
+Plug 'sheerun/vim-polyglot'
+Plug 'Yggdroot/indentline'
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+
+" Using a non-master branch
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+
+" Plugin outside ~/.vim/plugged with post-update hook
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'     " fuzzy file find
+Plug 'rstacruz/sparkup'         " parser for a condensed HTML format
+Plug 'SirVer/ultisnips'
+Plug 'brooth/far.vim'
+
+if has('nvim')
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+    Plug 'Shougo/deoplete.nvim'
+    Plug 'roxma/nvim-yarp'
+    Plug 'roxma/vim-hug-neovim-rpc'
+endif
+
+Plug 'w0rp/ale'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+Plug 'arthurxavierx/vim-unicoder'
+Plug 'vim-scripts/indentpython.vim'
+Plug 'Valloric/YouCompleteMe'
+Plug 'nvie/vim-flake8'
+Plug 'klen/python-mode'
+Plug 'scrooloose/nerdcommenter'  " nerd commenter - use <leader>cc
+Plug 'vim-perl/vim-perl6'       " perl6 support
+Plug 'soramugi/auto-ctags.vim'  " ctags
+Plug 'universal-ctags/ctags'
+Plug 'jsfaint/gen_tags.vim'     " ctags / gtags
+Plug 'christoomey/vim-system-copy'
+Plug 'ervandew/supertab'        " supertab context sensitive completion
+Plug 'vim-scripts/ZoomWin'      " zoom in/out of windows - toggle between wins
+Plug 'tpope/vim-sensible'
+Plug 'pangloss/vim-javascript'
+Plug 'elzr/vim-json'
+Plug 'python-mode/python-mode', { 'branch': 'develop' }
+Plug 'moll/vim-node'
+Plug 'vim-latex/vim-latex'
+Plug 'fs111/pydoc.vim'
+Plug 'nvie/vim-flake8'
+Plug 'fisadev/dragvisuals.vim'              " dragvisuals
+Plug 'vim-scripts/perl-support.vim'         " perl-support
+Plug 'vim-scripts/L9'                       " fuzzy finder requires this L9 library!
+Plug 'vim-scripts/FuzzyFinder'              " fuzzy finder
+Plug 'mileszs/ack.vim'                      " ack for grepping
+Plug 'jlanzarotta/bufexplorer'              " buffer explorer: usage : <leader>be
+
+"======== colorscheme plugins
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'iCyMind/NeoSolarized'             " NeoSolarized
+Plug 'dracula/vim', { 'as': 'dracula' }  " dracula
+Plug 'morhetz/gruvbox'                  " gruvbox
+Plug 'kaicataldo/material.vim'  " vim material theme
+Plug 'hzchirs/vim-material'     " vim-material theme
+Plug 'joshdick/onedark.vim'  " onedark  * best
+Plug 'NLKNguyen/papercolor-theme'       " papercolor
+Plug 'nanotech/jellybeans.vim'          " jellybeans
+Plug 'crusoexia/vim-dracula'
+Plug 'altercation/vim-colors-solarized'
+Plug 'lifepillar/vim-solarized8'
+Plug 'mhartington/oceanic-next'
+Plug 'tomasr/molokai'
+Plug 'jpo/vim-railscasts-theme'
+Plug 'rainux/vim-desert-warm-256'
+Plug 'zeis/vim-kolor'
+
+call plug#end()
+
+"================== GENERAL SETTINGS ==================
+" basics
+filetype on
+filetype plugin indent on
+syntax on
+syntax enable
+
+"========= autoload vimrc source
+autocmd! bufwritepost .vimrc source %
+
+
+set nocompatible
+set completeopt=longest
+
+"========= various settings
+set autoindent
+set autoread
+set autowrite
+set backspace=indent,eol,start
+set browsedir=current
+set complete+=k
+set nowrap
+set ruler
+set showcmd
+set visualbell
+set hidden
+set splitright
+set splitbelow
+
+set history=1000
+set undolevels=1000
+set nobackup
+set nowritebackup
+set noswapfile
+
+"==============
+let mapleader=","
+set path+=**
+" searching
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+if executable('ag')
+    set grepprg=ag\ --nogroup\ --nocolor\ --hidden\ --ignore\ .git
+endif
+
+" wildmenu settings
+set wildmenu
+set wildignorecase
+set wildmode=full
+set wildignore=*.o,*.obj,*~
+set wildignore=*.swp,*.tmp
+set wildignore=*.mp3,*.mp4,*.mkv
+set wildignore=*.bmp,*.gif,*.ico,*.jpg,*.png
+set wildignore=*.pdf,*.doc,*.docx,*.ppt,*.pptx
+set wildignore=*.rar,*.zip,*.tar,*.tar.gz,*.tar.xz
+
+set expandtab
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set number
+set relativenumber
+set numberwidth=5
+set cursorline
+set scroll=10
+set clipboard+=unnamedplus
+
+highlight ColorColumn ctermbg=DarkGrey
+set colorcolumn=81
+
+highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
+highlight MatchParen ctermbg=blue guibg=lightyellow
+
+" better copy & paste
+set pastetoggle=<F2>
+
+" mouse and backspace
+set bs=2
+if has('mouse')
+    set mouse=a
+endif
+set tw=79
+set nowrap
+set fo-=+
+
+" enable folding
+set foldmethod=indent
+set foldlevel=99
+" enable folding with spacebar
+nnoremap <space> za
+
+
+"====== shady characters for trailing spaces
+set list listchars=tab:>~,nbsp:_,trail:·
+
+autocmd FileWritePre * call TrimWhiteSpace()
+autocmd FileAppendPre * call TrimWhiteSpace()
+autocmd FilterWritePre * call TrimWhiteSpace()
+autocmd BufWritePre * call TrimWhiteSpace()
+
+map <F2> :call TrimWhiteSpace()<CR>
+map! <F2> :call TrimWhiteSpace()<CR>
+
+"======= automatically remove all trailing whitespace
+autocmd FileType c,cpp,js,pl,p6,py,for,f,f90,f95 autocmd BufWritePre <buffer> %s/\s\+$//e
+
+vmap <C-c> "+y
+
+"============== no simultaneous edits on files
+augroup NoSimultaneousEdits
+    autocmd!
+    autocmd SwapExists * let v:swapchoice = 'o'
+    autocmd SwapExists * echomsg ErrorMsg
+    autocmd SwapExists * echo 'Duplicate edit session (readonly)'
+    autocmd SwapExists * echohl None
+augroup END
+
+"============= find digraphs for accentuate
+inoremap <expr> <C-K> ShowDigraphs()
+
+function! ShowDigraphs ()
+    digraphs
+    call getchar()
+    return "\<C-K>"
+endfunction
+
+" =================== Highlight matches when jumping to next ==============
+nnoremap <silent> n n:call HLNext(0.4)<cr>
+nnoremap <silent> N N:call HLNext(0.4)<cr>
+
+function! HLNext(blinktime)
+    set invcursorline
+    redraw
+    exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+    set invcursorline
+    redraw
+endfunction
+
+"======= removes trailing spaces
+function! TrimWhiteSpace()
+    %s/\s*$//
+    ''
+endfunction
+
+"===============================================================================
+"== mappings
+
+" Fuzzy Finder matching mapping
+map <leader>ff :FufCoverageFile<CR>
+
+" bind nohl
+noremap <C-n> :nohl<CR>
+vnoremap <C-n> :nohl<CR>
+inoremap <C-n> :nohl<CR>
+
+" quicksave
+noremap <C-Z> :update<CR>
+vnoremap <C-Z> <C-C> :update<CR>
+inoremap <C-Z> <C-O> :update<CR>
+
+noremap <Leader>e :quit<CR>
+noremap <Leader>E :qa!<CR>
+
+" bind Ctrl+movement keys
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+map <C-h> <C-w>h
+
+"====== map sort function to a key
+vnoremap <Leader>s :sort<CR>
+vnoremap <Leader>n :sort f<CR>
+
+"====== easier moving of code blocks
+vnoremap < <gv
+vnoremap > >gv
+
+"===== path to python
+let g:python3_host_prog='/home/seneryilmaz/anaconda3/bin/python3'
+let g:python_host_prog='/usr/bin/python2'
+
+let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
+let python_highlight_all=1
+let g:SimplyFold_docstring_preview=1
+
+"====== DragVisuals
+vmap <expr> <S-M-LEFT> DVB_Drag('left')
+vmap <expr> <S-M-RIGHT> DVB_Drag('right')
+vmap <expr> <S-M-DOWN> DVB_Drag('down')
+vmap <expr> <S-M-UP> DVB_Drag('up')
+" mapping to duplicate block
+vmap <expr> D DVB_Duplicate()
+
+"===============================================================================
+" Plugin Settings parameters
+"
+"====== ale completion
+set completeopt=menu,menuone,preview,noselect,noinsert
+
+let g:ale_completion_enabled = 1
+let g:ale_python_autopep8_executable = 'autopep8'
+let g:ale_python_flake8_executable = 'python3'
+let g:ale_python_flake8_options = '-:wam flake8'
+
+" Nerd Commenter settings
+let g:NERDSpaceDelims = 1
+let g:NERDCompactSexyComs = 1
+let g:NERDDefaultAlign = 'left'
+let g:NERDCommentEmptyLines = 1
+let g:NERDTrimTrailingWhitespace = 1
+let g:NERDToggleCheckAllLines = 1
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#formatter = 'default'
+
+" Airline settings
+" do not show error/warning section
+let g:airline_section_error = ""
+let g:airline_section_warning = ""
+let g:airline_powerline_fonts = 0
+let g:airline#extensions#whitespace#enabled = 0
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+let g:airline_theme='solarized'
+let g:airline_solarized_bg='dark'
+
+let g:ycm_autoclose_preview_window_after_completion=1
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+"python with virtualenv support
+python << EOF
+import os
+import sys
+if 'VIRTUAL_ENV' in os.environ:
+    project_base_dir = os.environ['VIRTUAL_ENV']
+    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+    execfile(activate_this, dict(__file__=activate_this))
+EOF
+
+" check perl code with :make
+autocmd FileType perl set makeprg=perl\ -c\ %\ $*
+autocmd FileType perl set errorformat=%f:%l:%m
+autocmd FileType perl set autowrite
+
+"make tab in v mode ident code
+vmap <tab> >gv
+vmap <s-tab> <gv
+
+" comment/uncomment blocks of code (in vmode)
+vmap _c :s/^/#/gi<Enter>
+vmap _C :s/^#//gi<Enter>
+
+" LanguageClient
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+    \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
+    \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
+    \ 'python': ['/usr/local/bin/pyls'],
+    \ }
+
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definiton()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+
+" visual mode for commenter
+vnoremap <silent> <C-k> :s#^#\##<cr>:noh<cr>
+vnoremap <silent> <C-u> :s#^\###<cr>:noh<cr>
+
+"============ tag bar opens right for mappings and functions defined
+nnoremap <silent> <F4> :TagbarToggle<CR>
+
+" syntastic settings
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#jedi#show_docstring = 1
+let g:deoplete#enable_ignore_case = 1
+let g:deoplete#enable_smart_case = 1
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_insert_leave = 1
+let g:tagbar_autofocus = 1
+
+" material theme settings
+let g:material_theme_style = 'dark' " | 'palenight' | 'default'
+let g:material_terminal_italics = 1
+let g:airline_theme = 'material'
+
+let g:material_style = 'oceanic'
+
+" italics
+let g:onedark_terminal_italics = 1
+let g:onedark_underlined = 1
+let g:onedark_bold = 1
+
+let g:dracula_italic = 1
+let g:dracula_underlined = 1
+let g:dracula_bold = 1
+let g:dracula_undrcurl = 1
+let g:dracula_inverse = 1
+let g:dracula_colorterm = 1
+
+let g:neosolarized_italic = 1
+let g:neosolarized_underlined = 1
+let g:neosolarized_bold = 1
+let g:neosolarized_undrcurl = 1
+let g:neosolarized_inverse = 1
+let g:neosolarized_colorterm = 1
+
+let g:solarized_term_italics = 1
+let g:solarized_underlined = 1
+let g:solarized_bold = 1
+
+if (empty($TMUX))
+    if (has("nvim"))
+        let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+    endif
+    if (has("termguicolors"))
+        set termguicolors
+    endif
+endif
+
+" set terminal 256 colors
+set termguicolors
+
+"===============================================================================
+"" select colorscheme
+
+set background=dark
+colorscheme NeoSolarized            " IMHO best colorsheme for python, bash, perl
+"colorscheme dracula                " not bad
+"colorscheme gruvbox                " very similar to molokai, good for eye
+"colorscheme material
+"colorscheme vim-material
+"colorscheme onedark
+"colorscheme PaperColor
+"colorscheme jellybeans
+"colorscheme vim-dracula
+"colorscheme vim-colors-solarized
+"colorscheme solarized8
+"colorscheme oceanic-next
+"colorscheme molokai
+"colorscheme railscasts
+"colorscheme desert-warm-256
+"colorscheme kolor
