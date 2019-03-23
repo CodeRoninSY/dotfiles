@@ -1,6 +1,10 @@
 " .vimrc
 "
 "===============================================================================
+echo "--------------------------------------------------------------------------"
+echo "                          NVIM .vimrc for WSL                          "
+echo "--------------------------------------------------------------------------"
+"
 let vim_plug_just_installed = 0
 let vim_plug_path = expand('~/.vim/autoload/plug.vim')
 if !filereadable(vim_plug_path)
@@ -19,32 +23,63 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'SirVer/ultisnips'
+Plug 'Valloric/YouCompleteMe'
 Plug 'Yggdroot/indentline'
+Plug 'arthurxavierx/vim-unicoder'
+Plug 'brooth/far.vim'
+Plug 'christoomey/vim-system-copy'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'elzr/vim-json'
+Plug 'ervandew/supertab'                    " supertab context sensitive completion
+Plug 'fisadev/dragvisuals.vim'              " dragvisuals
+Plug 'fs111/pydoc.vim'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
 Plug 'jistr/vim-nerdtree-tabs'
+Plug 'jlanzarotta/bufexplorer'              " buffer explorer: usage : <leader>be
+Plug 'jsfaint/gen_tags.vim'     " ctags / gtags
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'                     " fuzzy file find
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/vim-github-dashboard'
+Plug 'klen/python-mode'
+Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 Plug 'mattn/emmet-vim'
+Plug 'mileszs/ack.vim'                      " ack for grepping
+Plug 'moll/vim-node'
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': 'yarn install'}
+Plug 'nvie/vim-flake8'
+Plug 'pangloss/vim-javascript'
+Plug 'prabirshrestha/async.vim'             " use with vim-lsp
+Plug 'prabirshrestha/vim-lsp'               " language server protocol
+Plug 'python-mode/python-mode', { 'branch': 'develop' }
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+Plug 'rstacruz/sparkup'                     " parser for a condensed HTML format
+Plug 'scrooloose/nerdcommenter'             " nerd commenter - use <leader>cc
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'scrooloose/syntastic'
 Plug 'sheerun/vim-polyglot'
+Plug 'soramugi/auto-ctags.vim'              " ctags
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
-Plug 'wsdjeg/FlyGrep.vim'  " grep on the fly
+Plug 'tpope/vim-vinegar'                    " window manager; usage: - to jump buffer
+Plug 'universal-ctags/ctags'
+Plug 'vim-latex/vim-latex'
+Plug 'vim-perl/vim-perl6'                   " perl6 support
+Plug 'vim-scripts/AutoComplPop'             " autocomplete for perl
+Plug 'vim-scripts/FuzzyFinder'              " fuzzy finder
+Plug 'vim-scripts/L9'                       " fuzzy finder requires this L9 library!
+Plug 'vim-scripts/ZoomWin'                  " zoom in/out of windows - toggle between wins
+Plug 'vim-scripts/indentpython.vim'
+Plug 'vim-scripts/perl-support.vim'         " perl-support
+Plug 'w0rp/ale'
+Plug 'wolfgangmehner/perl-support'          " perl-support
+Plug 'wsdjeg/FlyGrep.vim'                   " grep on the fly
+Plug 'yanick/Neovim-RPC'                    " neovim RPC
 Plug 'zchee/deoplete-jedi'
-
-" Using a non-master branch
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
-
-" Plugin outside ~/.vim/plugged with post-update hook
-Plug 'SirVer/ultisnips'
-Plug 'brooth/far.vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'     " fuzzy file find
-Plug 'rstacruz/sparkup'         " parser for a condensed HTML format
 
 if has('nvim')
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -58,55 +93,20 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
-Plug 'Valloric/YouCompleteMe'
-Plug 'arthurxavierx/vim-unicoder'
-Plug 'christoomey/vim-system-copy'
-Plug 'elzr/vim-json'
-Plug 'ervandew/supertab'        " supertab context sensitive completion
-Plug 'fisadev/dragvisuals.vim'              " dragvisuals
-Plug 'fs111/pydoc.vim'
-Plug 'jlanzarotta/bufexplorer'              " buffer explorer: usage : <leader>be
-Plug 'jsfaint/gen_tags.vim'     " ctags / gtags
-Plug 'klen/python-mode'
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
-Plug 'mileszs/ack.vim'                      " ack for grepping
-Plug 'moll/vim-node'
-Plug 'nvie/vim-flake8'
-Plug 'nvie/vim-flake8'
-Plug 'pangloss/vim-javascript'
-Plug 'python-mode/python-mode', { 'branch': 'develop' }
-Plug 'scrooloose/nerdcommenter'  " nerd commenter - use <leader>cc
-Plug 'soramugi/auto-ctags.vim'  " ctags
-Plug 'tpope/vim-sensible'
-Plug 'universal-ctags/ctags'
-Plug 'vim-latex/vim-latex'
-Plug 'vim-perl/vim-perl6'       " perl6 support
-Plug 'vim-scripts/AutoComplPop'             " autocomplete for perl
-Plug 'vim-scripts/FuzzyFinder'              " fuzzy finder
-Plug 'vim-scripts/L9'                       " fuzzy finder requires this L9 library!
-Plug 'vim-scripts/ZoomWin'      " zoom in/out of windows - toggle between wins
-Plug 'vim-scripts/indentpython.vim'
-Plug 'vim-scripts/perl-support.vim'         " perl-support
-Plug 'w0rp/ale'
-Plug 'wolfgangmehner/perl-support'          " perl-support
-Plug 'yanick/Neovim-RPC'                    " neovim RPC
-Plug 'zenbro/mirror.vim'                    " remote sync on any development platform. usage: <leader>ss
-
 "======== colorscheme plugins
-Plug 'NLKNguyen/papercolor-theme'       " papercolor
+Plug 'NLKNguyen/papercolor-theme'           " papercolor
 Plug 'altercation/vim-colors-solarized'
 Plug 'crusoexia/vim-dracula'
-Plug 'dracula/vim', { 'as': 'dracula' }  " dracula
-Plug 'hzchirs/vim-material'     " vim-material theme
-Plug 'iCyMind/NeoSolarized'             " NeoSolarized
-Plug 'joshdick/onedark.vim'  " onedark  * best
+Plug 'dracula/vim', { 'as': 'dracula' }     " dracula
+Plug 'hzchirs/vim-material'                 " vim-material theme
+Plug 'iCyMind/NeoSolarized'                 " NeoSolarized
+Plug 'joshdick/onedark.vim'                 " onedark  * best
 Plug 'jpo/vim-railscasts-theme'
-Plug 'kaicataldo/material.vim'  " vim material theme
+Plug 'kaicataldo/material.vim'              " vim material theme
 Plug 'lifepillar/vim-solarized8'
 Plug 'mhartington/oceanic-next'
-Plug 'morhetz/gruvbox'                  " gruvbox
-Plug 'nanotech/jellybeans.vim'          " jellybeans
+Plug 'morhetz/gruvbox'                      " gruvbox
+Plug 'nanotech/jellybeans.vim'              " jellybeans
 Plug 'rainux/vim-desert-warm-256'
 Plug 'tomasr/molokai'
 Plug 'vim-airline/vim-airline'
@@ -225,6 +225,18 @@ autocmd FileType c,cpp,js,pl,p6,py,for,f,f90,f95 autocmd BufWritePre <buffer> %s
 
 vmap <C-c> "+y
 
+"======== open help files in new tab
+augroup HelpInTabs
+    autocmd!
+    autocmd BufEnter *.txt call HelpInNewTab()
+augroup END
+
+function! HelpInNewTab()
+    if &buftype == 'help'
+        execute "normal \<C-W>T"
+    endif
+endfunction
+
 "============== no simultaneous edits on files
 augroup NoSimultaneousEdits
     autocmd!
@@ -267,7 +279,10 @@ endfunction
 " Fuzzy Finder matching mapping
 map <leader>ff :FufCoverageFile<CR>
 
-" mirror.vim shortcuts
+" redraw screen - press <F9> and it redraws the window in normal mode
+nmap <F9>  :redr!<CR>
+
+"mirror.vim shortcuts
 command! SyncSave w | MirrorPush
 map <leader>ss :SyncSave<CR>
 
@@ -329,8 +344,18 @@ let g:ale_linters = {
     \ }
 
 let g:LanguageClient_serverCommands = {
-    \ 'sh': ['bash-language-server', 'start']
+    \ 'sh': ['bash-language-server', 'start'],
+    \ 'fortran': ['fortls', '--symbol_skip_mem', '--incrmental_sync', '--autocomplete_no_prefix'],
+    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'iris'],
+    \ 'javascript': ['usr/local/bin/javascript-typescript-stdio'],
+    \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
+    \ 'python': ['/usr/local/bin/pyls'],
     \ }
+
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definiton()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 
 " Nerd Commenter settings
 let g:NERDSpaceDelims = 1
@@ -340,6 +365,10 @@ let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
 let g:NERDToggleCheckAllLines = 1
 
+"======= ultisnips python
+let g:UltiSnipsUsePythonVersion = 3
+
+"======= airline theme settings
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
@@ -385,17 +414,7 @@ vmap <s-tab> <gv
 vmap _c :s/^/#/gi<Enter>
 vmap _C :s/^#//gi<Enter>
 
-" LanguageClient
-let g:LanguageClient_serverCommands = {
-    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-    \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
-    \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
-    \ 'python': ['/usr/local/bin/pyls'],
-    \ }
 
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definiton()<CR>
-nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 
 " visual mode for commenter
 vnoremap <silent> <C-k> :s#^#\##<cr>:noh<cr>
@@ -470,8 +489,8 @@ set termguicolors
 set background=dark
 "colorscheme PaperColor
 "colorscheme desert-warm-256
-"colorscheme dracula                " not bad
-"colorscheme gruvbox                " very similar to molokai, good for eye
+"colorscheme dracula
+"colorscheme gruvbox
 "colorscheme jellybeans
 "colorscheme kolor
 "colorscheme material
@@ -483,4 +502,4 @@ set background=dark
 "colorscheme vim-colors-solarized
 "colorscheme vim-dracula
 "colorscheme vim-material
-colorscheme NeoSolarized            " IMHO best colorsheme for python, bash, perl
+colorscheme NeoSolarized
